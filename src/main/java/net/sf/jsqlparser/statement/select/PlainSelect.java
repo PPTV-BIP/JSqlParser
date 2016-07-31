@@ -37,7 +37,7 @@ public class PlainSelect implements SelectBody {
 
 	private Distinct distinct = null;
 	private List<SelectItem> selectItems;
-	private Table into;
+	private List<IntoTarget> into;
 	private FromItem fromItem;
 	private List<Join> joins;
 	private Expression where;
@@ -48,6 +48,7 @@ public class PlainSelect implements SelectBody {
 	private Top top;
 	private OracleHierarchicalExpression oracleHierarchical = null;
 	private boolean oracleSiblings = false;
+	private List<Expression> topGroupByColumns;
 
 	/**
 	 * The {@link FromItem} in this query
@@ -58,7 +59,7 @@ public class PlainSelect implements SelectBody {
 		return fromItem;
 	}
 
-	public Table getInto() {
+	public List<IntoTarget> getInto() {
 		return into;
 	}
 
@@ -80,8 +81,8 @@ public class PlainSelect implements SelectBody {
 		fromItem = item;
 	}
 
-	public void setInto(Table table) {
-		into = table;
+	public void setInto(List<IntoTarget> targets) {
+		into = targets;
 	}
 
 	public void setSelectItems(List<SelectItem> list) {
@@ -187,6 +188,13 @@ public class PlainSelect implements SelectBody {
 		this.oracleSiblings = oracleSiblings;
 	}
 
+	public List<Expression> getTopGroupByColumns() {
+		return topGroupByColumns;
+	}
+
+	public void setTopGroupByColumns(List<Expression> groupByColumns) {
+		this.topGroupByColumns = groupByColumns;
+	}
 	@Override
 	public String toString() {
 		StringBuilder sql = new StringBuilder("SELECT ");

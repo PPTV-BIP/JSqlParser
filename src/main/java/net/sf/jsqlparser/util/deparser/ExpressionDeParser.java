@@ -500,4 +500,9 @@ public class ExpressionDeParser implements ExpressionVisitor, ItemsListVisitor {
     public void visit(RegExpMatchOperator rexpr) {
         visitBinaryExpression(rexpr, " " + rexpr.getStringExpression() + " ");
     }
+
+    @Override
+    public void visit(BooleanValue rexpr) {
+        buffer.append(rexpr.getStringValue());
+    }
 }
